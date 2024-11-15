@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendVerificationEmail;
 use App\Models\User;
 use App\Models\VerificationCode;
 use Illuminate\Container\Attributes\Auth;
@@ -52,7 +53,6 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-        // dd($user);
     
         FacadesAuth::login($user);
     
@@ -63,9 +63,8 @@ class AuthController extends Controller
             'code' => $rand_number,
         ]);
 
-        $emailCode = new MessageController();
-        $emailCode->sendCode(FacadesAuth::user()->id,[$rand_number]);
-        
+        SendVerificationEmail::dispatch($user->email, $rand_number);
+
         return redirect()->route('code.verification')->with('status', 'Registration successful!');
     }
     

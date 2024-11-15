@@ -17,6 +17,14 @@
                     </button>
                 </div>
             @endif
+            @if (session('wecoming'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Welcome To Our Users Table Page </strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             
             @if (session('error'))
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -79,7 +87,6 @@
                     @endforeach
                 </tbody>
             </table>
-
             <!-- Pagination Links -->
             {{ $users->links() }}
         </div>
@@ -115,16 +122,6 @@
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
-                    </div>
-
-                    <!-- Role Input -->
-                    <div class="form-group">
-                        <label for="roles">Roles</label>
-                        <select id="roles" class="form-control" name="role">
-                            <option value="Admin">Admin</option>
-                            <option value="Editor">Editor</option>
-                            <option value="Viewer">Viewer</option>
-                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">

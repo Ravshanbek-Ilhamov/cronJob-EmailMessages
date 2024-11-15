@@ -1,16 +1,11 @@
 <x-mail::message>
 # Verify Your Account
 
-Welcome to {{ config('app.name') }}!
+Thank you for registering on {{ config('app.name') }}!
 
-To complete your registration, please verify your account by entering the code below on the verification page.
+Your verification code is: **{{ $data['code'] }}**
 
-## Your Verification Code
-**{{ $data['code'] }}**
-
-<x-mail::button :url="route('verification.page')">
-Go to Verification Page
-</x-mail::button>
+Please enter this code on the verification page to complete your registration.
 
 Thanks,<br>
 {{ config('app.name') }}

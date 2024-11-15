@@ -19,9 +19,8 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email',
             'password' => 'required|min:6',
-            'role' => 'required'
         ]);
 
         User::create([
@@ -46,14 +45,12 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'role' => 'required'
+            'email' => 'required|email|',
         ]);
 
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'role' => $request->role,
         ]);
 
         return redirect()->route('user.index')->with('success', 'User updated successfully.');
@@ -72,7 +69,7 @@ class UserController extends Controller
         session()->invalidate();
         session()->regenerateToken();
     
-        return redirect()->route('login')->with('success', 'Logged out successfully.');
+        return redirect()->route('login.index')->with('success', 'Logged out successfully.');
     }
     
 
